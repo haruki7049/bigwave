@@ -30,6 +30,12 @@
           system,
           ...
         }:
+        let
+          ghc-with-packages = pkgs.haskellPackages.ghc.withPackages (ps: [
+            ps.cabal-install
+            ps.array
+          ]);
+        in
         {
           treefmt = {
             projectRootFile = "flake.nix";
@@ -54,8 +60,7 @@
           devShells.default = pkgs.mkShell {
             packages = [
               # Rust
-              pkgs.haskellPackages.ghc
-              pkgs.haskellPackages.cabal-install
+              ghc-with-packages
 
               # Nix
               pkgs.nil
