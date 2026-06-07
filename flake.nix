@@ -24,8 +24,9 @@
 
       perSystem =
         {
-          pkgs,
+          config,
           lib,
+          pkgs,
           system,
           ...
         }:
@@ -63,6 +64,10 @@
             shellHook = ''
               export PS1="\n[nix-shell:\w]$ "
             '';
+
+            inputsFrom = [
+              config.treefmt.build.devShell
+            ];
           };
         };
     };
