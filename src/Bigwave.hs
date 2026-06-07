@@ -3,7 +3,6 @@ module Bigwave (Wave (..), Samples (..), WritableWave (..)) where
 import Data.Array
 import Data.Binary
 import Data.ByteString.Lazy as BL
-import Data.Word
 
 newtype Samples a = Samples (Array Int a) deriving (Show, Eq)
 
