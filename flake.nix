@@ -32,7 +32,10 @@
         }:
         let
           ghc-with-packages = pkgs.haskellPackages.ghc.withPackages (ps: [
-            ps.cabal-install
+            # Tools
+            ps.cabal-install # Cabal
+            ps.haskell-language-server # Haskell LSP
+
             ps.array
             ps.binary
             ps.bytestring
