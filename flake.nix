@@ -34,6 +34,8 @@
           ghc-with-packages = pkgs.haskellPackages.ghc.withPackages (ps: [
             ps.cabal-install
             ps.array
+            ps.binary
+            ps.bytestring
           ]);
         in
         {
