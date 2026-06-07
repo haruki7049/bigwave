@@ -1,4 +1,4 @@
-module Bigwave (Wave (..), Samples (..), WritableWave) where
+module Bigwave (Wave (..), Samples (..), WritableWave (..)) where
 
 import Data.Array
 import Data.Binary

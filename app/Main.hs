@@ -1,6 +1,6 @@
 module Main where
 
-import Bigwave (Samples (..), Wave (..), WritableWave)
+import Bigwave (Samples (..), Wave (..), WritableWave (..))
 import Data.Array
 
 main :: IO ()
