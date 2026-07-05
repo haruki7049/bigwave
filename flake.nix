@@ -1,7 +1,6 @@
 {
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    systems.url = "github:nix-systems/default";
     flake-compat.url = "github:edolstra/flake-compat";
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
@@ -16,40 +15,37 @@
   outputs =
     inputs:
     inputs.flake-parts.lib.mkFlake { inherit inputs; } {
-      systems = import inputs.systems;
+      systems = [
+        "x86_64-linux"
+        "aarch64-linux"
+        "aarch64-darwin"
+      ];
 
       imports = [
         inputs.treefmt-nix.flakeModule
       ];
 
       perSystem =
-        {
-          config,
-          lib,
-          pkgs,
-          system,
-          ...
-        }:
+        { pkgs, lib, ... }:
         let
-          ghc-with-packages = pkgs.haskellPackages.ghc.withPackages (ps: [
-            # Tools
-            ps.cabal-install # Cabal
-            ps.haskell-language-server # Haskell LSP
+          nativeBuildInputs = [
+            pkgs.nil # Nix LSP
+            pkgs.haskellPackages.cabal-install # Cabal build tool for Haskell
+            pkgs.haskellPackages.haskell-language-server # Haskell LSP
+          ];
 
-            ps.array
-            ps.binary
-            ps.bytestring
-          ]);
+          buildInputs = [ ];
         in
         {
           treefmt = {
-            projectRootFile = "flake.nix";
+            projectRootFile = ".git/config";
 
             # Nix
             programs.nixfmt.enable = true;
 
             # Haskell
             programs.ormolu.enable = true;
+            programs.cabal-gild.enable = true;
 
             # GitHub Actions
             programs.actionlint.enable = true;
@@ -57,27 +53,17 @@
             # Markdown
             programs.mdformat.enable = true;
 
-            # ShellScript
-            programs.shellcheck.enable = true;
+            # Shell Scripts
             programs.shfmt.enable = true;
+            programs.shellcheck.enable = true;
           };
 
-          devShells.default = pkgs.mkShell {
-            packages = [
-              # Rust
-              ghc-with-packages
-
-              # Nix
-              pkgs.nil
+          devShells.default = pkgs.haskellPackages.shellFor {
+            packages = hpkgs: [
+              (hpkgs.callCabal2nix "bigwave" ./. { })
             ];
 
-            shellHook = ''
-              export PS1="\n[nix-shell:\w]$ "
-            '';
-
-            inputsFrom = [
-              config.treefmt.build.devShell
-            ];
+            inherit nativeBuildInputs buildInputs;
           };
         };
     };
