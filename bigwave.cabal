@@ -19,16 +19,6 @@ library
   hs-source-dirs: lib
   default-language: Haskell2010
 
-executable bigwave
-  main-is: Main.hs
-  build-depends:
-    array,
-    base,
-    bigwave,
-
-  hs-source-dirs: app
-  default-language: Haskell2010
-
 test-suite bigwave-test
   default-language: Haskell2010
   type: exitcode-stdio-1.0
