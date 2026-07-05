@@ -16,7 +16,7 @@ library
     binary,
     bytestring,
 
-  hs-source-dirs: src
+  hs-source-dirs: lib
   default-language: Haskell2010
 
 executable bigwave
