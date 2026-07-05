@@ -1,37 +1,39 @@
-cabal-version:      3.0
-name:               bigwave
-version:            0.1.0.0
-license:            MIT
-license-file:       LICENSE
-author:             haruki7049
-maintainer:         tontonkirikiri@gmail.com
-category:           Sound
-build-type:         Simple
+cabal-version: 3.0
+name: bigwave
+version: 0.1.0.0
+license: MIT
+license-file: LICENSE
+author: haruki7049
+maintainer: tontonkirikiri@gmail.com
+category: Sound
+build-type: Simple
 
 library
-    exposed-modules:  Bigwave
-    build-depends:
-        , base ^>=4.19.2.0
-        , array ^>=0.5.8.0
-        , bytestring ^>=0.12.1.0
-        , binary ^>=0.8.9.1
-    hs-source-dirs:   src
-    default-language: Haskell2010
+  exposed-modules: Bigwave
+  build-depends:
+    array,
+    base,
+    binary,
+    bytestring,
+
+  hs-source-dirs: src
+  default-language: Haskell2010
 
 executable bigwave
-    main-is: Main.hs
-    build-depends:
-        , base ^>=4.19.2.0
-        , array ^>=0.5.8.0
-        , bigwave
-    hs-source-dirs: app
-    default-language: Haskell2010
+  main-is: Main.hs
+  build-depends:
+    array,
+    base,
+    bigwave,
+
+  hs-source-dirs: app
+  default-language: Haskell2010
 
 test-suite bigwave-test
-    default-language: Haskell2010
-    type:             exitcode-stdio-1.0
-    hs-source-dirs:   test
-    main-is:          Main.hs
-    build-depends:
-        , base ^>=4.19.2.0
-        , bigwave
+  default-language: Haskell2010
+  type: exitcode-stdio-1.0
+  hs-source-dirs: test
+  main-is: Main.hs
+  build-depends:
+    base,
+    bigwave,
