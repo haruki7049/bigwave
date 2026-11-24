@@ -11,9 +11,6 @@ workflows:
         - 'ytanikin/pr-conventional-commits@1.5.2'
     '.github/workflows/verify-actions-lockfile.yml':
         - 'actions/checkout@v7.0.1'
-    '.github/workflows/zig-ci.yml':
-        - 'actions/checkout@v7.0.1'
-        - 'mlugg/setup-zig@v2.2.1'
 dependencies:
     'actions/checkout@v7.0.1':
         ref: 'v7.0.1'
@@ -25,11 +22,6 @@ dependencies:
         commit: 'sha1-bb0495a1086c46893eee56f32fd192dfe4a15bb9'
         owner_id: 36824654
         repo_id: 212301524
-    'mlugg/setup-zig@v2.2.1':
-        ref: 'v2.2.1'
-        commit: 'sha1-d1434d08867e3ee9daa34448df10607b98908d29'
-        owner_id: 7289241
-        repo_id: 812112570
     'ytanikin/pr-conventional-commits@1.5.2':
         ref: '1.5.2'
         commit: 'sha1-639145d78959c53c43112365837e3abd21ed67c1'
